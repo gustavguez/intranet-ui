@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Firebase config files
+/src/environments/firebase.ts
+/src/environments/firebase.prod.ts
+
 # compiled output
 /dist
 /tmp

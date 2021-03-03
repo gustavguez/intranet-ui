@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "intranet-b089b": {
+      "hosting": {
+        "intranet-ui": [
+          "intranet-b089b"
+        ]
+      }
+    }
+  }
+}
