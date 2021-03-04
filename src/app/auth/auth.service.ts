@@ -39,6 +39,21 @@ export class AuthService {
     return obs;
   }
 
+  public logout(): Observable<void> {
+    let obs: Observable<void> = new Observable((sub: Subscriber<void>) => {
+      //Load to user
+      this.authUser = null;
+
+      //Signout
+      this.fireAuthService.signOut().finally(() => {
+        //Resolve obs
+        sub.next();
+        sub.complete();
+      })
+    });
+    return obs;
+  }
+
   public loadSession(): Observable<AuthUserModel | null> {
     this.authUser = null;
     return this.fireAuthService.user.pipe(

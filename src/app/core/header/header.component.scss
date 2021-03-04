@@ -1,0 +1,15 @@
+.menu-button {
+    @apply bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white;
+}
+
+.menu-links-container {
+    @apply px-2 pt-2 pb-3 space-y-1 sm:px-3;
+}
+
+.menu-link {
+    @apply text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium;
+}
+
+.menu-link-active {
+    @apply bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium;
+}
