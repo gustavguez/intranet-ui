@@ -30,7 +30,18 @@
   
     <div class="" id="mobile-menu" [class.hidden]="!menuState">
       <div class="menu-links-container">
-        <a href="#" (click)="onNavigate($event, 'Intranet')" class="menu-link-active">Planificar</a>
+        <a 
+          routerLink="/intranet" 
+          routerLinkActive="menu-link-active" 
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="onToggleMenuState()" class="menu-link">Inicio</a>
+
+          <a 
+          routerLink="/intranet/nutritions" 
+          routerLinkActive="menu-link-active" 
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="onToggleMenuState()" class="menu-link">Planificar semana</a> 
+                 
         <a href="#" (click)="onLogout($event)" class="menu-link">Cerrar sesión</a>
       </div>
     </div>

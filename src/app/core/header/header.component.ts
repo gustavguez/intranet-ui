@@ -36,14 +36,4 @@ export class HeaderComponent {
       this.router.navigate(['auth']);
     });
   }
-
-  onNavigate(event: MouseEvent, route: string){
-    event.preventDefault();
-
-    //Close nav
-    this.menuState = false;
-
-    //Navigate
-    this.router.navigate([route]);
-  }
 }
