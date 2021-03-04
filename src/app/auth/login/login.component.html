@@ -1,7 +1,7 @@
 <app-popup-container>
     <div class="container">
         <h3 class="title">Iniciar sesión</h3>
-        <form>
+        <form [formGroup]="form" (submit)="onLogin()">
             <div class="mb-4">
                 <label for="email">
                     Correo electrónico
@@ -9,7 +9,8 @@
                 <input 
                     id="email"
                     type="email" 
-                    placeholder="Correo electrónico" />
+                    placeholder="Correo electrónico" 
+                    formControlName="email"/>
             </div>
 
             <div class="mb-4">
@@ -18,15 +19,18 @@
                 </label>
                 <input 
                     id="passwod"
-                    type="passwod" 
-                    placeholder="Clave" />
+                    type="password" 
+                    placeholder="Clave" 
+                    formControlName="password"/>
             </div>
 
             <div class="button-container">
                 <button
+                    [disabled]="loading || !form.valid"
+                    [class.disabled]="loading || !form.valid"
                     class="primary-button"
-                    type="button">
-                    Ingresar
+                    type="submit">
+                    {{ loading ? 'Cargando...' : 'Ingresar' }}
                 </button>
             </div>
         </form>

@@ -1,39 +1,53 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, Subscriber } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { firebaseErrors } from '../shared/firebase/errors';
+import { AuthUserModel } from './auth-user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  private authUser: AuthUserModel | null;
 
-  public login(email: string, password: string): Observable<boolean> {
-    let obs: Observable<boolean> = new Observable((sub: Subscriber<boolean>) => {
+  constructor(private fireAuthService: AngularFireAuth) {
+    //Init models
+    this.authUser = null;
+  }
 
+  public getAuthUser(): AuthUserModel | null {
+    return this.authUser;
+  }
+
+  public login(email: string, password: string): Observable<AuthUserModel> {
+    let obs: Observable<AuthUserModel> = new Observable((sub: Subscriber<AuthUserModel>) => {
+      this.fireAuthService.signInWithEmailAndPassword(email, password).then((response: any) => {
+        //Load to user
+        this.authUser = new AuthUserModel(response.email);
+
+        //Resolve obs
+        sub.next(this.authUser);
+        sub.complete();
+      }).catch((error: any) => {
+        //resolve observable with error
+        sub.error(firebaseErrors[error.code]);
+      })
     })
     return obs;
-    // var scope = this;
-    // firebase.auth().signInWithEmailAndPassword(this.Email, this.Password)
-    //   .then(function () {
-    //     if (firebase.auth().currentUser.emailVerified) {
-    //       scope.OpenAdminDashboad();
-    //       console.log("correo validado");
-    //     } else {
-    //       console.log("correo no validado");
-    //       //scope.LogOut();
-    //       scope.BorrarCampos();
-    //       scope.ResendEmailVerification();
-    //       scope.router.navigate(['verificacion-email']);
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     const errorCode = error.code;
-    //     let errorMessage = scope.VerifyErroCode(errorCode);
-    //     scope.Notificacion(errorMessage);
-    //     if (errorMessage == null) {
-    //       errorMessage = error.message;
-    //     }
-    //   });
+  }
+
+  public loadSession(): Observable<AuthUserModel | null> {
+    this.authUser = null;
+    return this.fireAuthService.user.pipe(
+      map((response: any) => {
+        if (response) {
+          this.authUser = new AuthUserModel(response.email);
+        }
+        return this.authUser;
+      })
+    );
   }
 }

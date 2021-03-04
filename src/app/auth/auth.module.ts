@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 
 import { AuthRoutingModule } from './auth-routing.module';
@@ -14,7 +16,9 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     SharedModule,
     AuthRoutingModule,
-    AngularFireModule
+    AngularFireModule,
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class AuthModule { }
