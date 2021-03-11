@@ -44,15 +44,10 @@ export class LoginComponent {
         (response: AuthUserModel) => {
           //Stop loading
           this.loading = false;
-
-          //Redirect to intranet
-          this.router.navigate(['intranet']);
         },
         (error: string) => {
           //Stop loading
           this.loading = false;
-
-          console.log(error)
         }
       )
     }

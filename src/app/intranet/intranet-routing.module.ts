@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { InitializeComponent } from './initialize/initialize.component';
 import { IntranetComponent } from './intranet.component';
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
           {
             path: '',
             component: DashboardComponent
+          },
+          {
+            path: 'initialize',
+            component: InitializeComponent
           },
           {
             path: 'finances',

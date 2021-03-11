@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, Subscriber } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { firebaseErrors } from '../shared/firebase/errors';
+import { firebaseErrors } from '../shared/firebase/firebase-errors';
 import { AuthUserModel } from './auth-user.model';
 
 @Injectable({
@@ -12,10 +12,12 @@ import { AuthUserModel } from './auth-user.model';
 export class AuthService {
 
   private authUser: AuthUserModel | null;
+  public onAuthUserChange: EventEmitter<AuthUserModel | null>;
 
   constructor(private fireAuthService: AngularFireAuth) {
     //Init models
     this.authUser = null;
+    this.onAuthUserChange = new EventEmitter();
   }
 
   public getAuthUser(): AuthUserModel | null {
@@ -27,6 +29,9 @@ export class AuthService {
       this.fireAuthService.signInWithEmailAndPassword(email, password).then((response: any) => {
         //Load to user
         this.authUser = new AuthUserModel(response.email);
+
+        //Emit change
+        this.onAuthUserChange.emit(this.authUser);
 
         //Resolve obs
         sub.next(this.authUser);
@@ -46,6 +51,9 @@ export class AuthService {
 
       //Signout
       this.fireAuthService.signOut().finally(() => {
+        //Emit change
+        this.onAuthUserChange.emit(this.authUser);
+
         //Resolve obs
         sub.next();
         sub.complete();
