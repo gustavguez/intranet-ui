@@ -1,1 +1,14 @@
-<button (click)="onLogin()">Login</button>
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <input
+    type="email"
+    formControlName="username"
+    placeholder="Ingrese el email"
+  />
+  <input
+    type="password"
+    formControlName="password"
+    placeholder="Ingrese la clave"
+  />
+  <input type="submit" value="Iniciar sesión" [disabled]="loading" />
+  <p style="color: red" *ngIf="error">{{ error }}</p>
+</form>

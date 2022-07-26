@@ -7,6 +7,7 @@ import {
   CollectionReference,
   Firestore,
 } from '@angular/fire/firestore';
+import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { from, Observable, of } from 'rxjs';
 import { ApiServiceInterface } from './api-service.interface';
 
@@ -22,6 +23,14 @@ export class FirestoreApiService implements ApiServiceInterface {
   //Login with username and password
   public auth(username: string, password: string): Observable<any> {
     return from(signInWithEmailAndPassword(this.fireAuth, username, password));
+  }
+
+  public logout(): Observable<any> {
+    return from(this.fireAuth.signOut());
+  }
+
+  public getLoggedUser(): Observable<any> {
+    return of(this.fireAuth.currentUser);
   }
 
   //Add document to any collection

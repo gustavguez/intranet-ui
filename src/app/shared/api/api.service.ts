@@ -12,6 +12,14 @@ export class ApiService {
     return this.firestoreApi.auth(username, password);
   }
 
+  public logout(): Observable<any> {
+    return this.firestoreApi.logout();
+  }
+
+  public getLoggedUser(): Observable<any> {
+    return this.firestoreApi.getLoggedUser();
+  }
+
   public add(uri: string, data: any): Observable<any> {
     return this.firestoreApi.add(uri, data);
   }
