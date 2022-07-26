@@ -1,4 +1,5 @@
 export const environment = {
+  //Firebase config
   firebase: {
     projectId: 'intranet-79368',
     appId: '1:134485977552:web:3aac5b645dc21c39dd71d5',
@@ -7,5 +8,7 @@ export const environment = {
     authDomain: 'intranet-79368.firebaseapp.com',
     messagingSenderId: '134485977552',
   },
-  production: true
+  //Uris
+  nutritionUnitsUri: '/nutrition-units',
+  production: true,
 };
