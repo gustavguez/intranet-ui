@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 
 import {
   addDoc,
@@ -14,14 +15,20 @@ import { ApiServiceInterface } from './api-service.interface';
 })
 export class FirestoreApiService implements ApiServiceInterface {
   constructor(
-    private firestore: Firestore // Injects the instantiated Firestore instance
+    private fireAuth: Auth,
+    private fireStore: Firestore // Injects the instantiated Firestore instance
   ) {}
+
+  //Login with username and password
+  public auth(username: string, password: string): Observable<any> {
+    return from(signInWithEmailAndPassword(this.fireAuth, username, password));
+  }
 
   //Add document to any collection
   public add(uri: string, data: any): Observable<any> {
     const collectionName: string = this.uriToCollection(uri);
     const collectionRef: CollectionReference = collection(
-      this.firestore,
+      this.fireStore,
       collectionName
     );
 

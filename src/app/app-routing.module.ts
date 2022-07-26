@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DatabaseInitComponent } from './database/database-init/database-init.component';
+
+import { LoginComponent } from './auth/login/login.component';
 
 const routes: Routes = [
   {
-    path: 'database/init',
-    component: DatabaseInitComponent,
+    path: '',
+    component: LoginComponent,
   },
 ];
 
