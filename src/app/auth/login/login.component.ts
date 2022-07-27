@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { ApiService } from 'src/app/shared/api/api.service';
 import { environment } from 'src/environments/environment';
+import translations from '../auth.translations';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent {
   //Create login form
-  loginForm: FormGroup<any> = new FormGroup({
+  loginForm: UntypedFormGroup = new UntypedFormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
@@ -19,7 +22,7 @@ export class LoginComponent {
   error: string = '';
 
   //Inject services
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   //Custom events
   onLogin(): void {
@@ -44,14 +47,14 @@ export class LoginComponent {
         this.loading = false;
 
         //Show error
-        this.error = 'Clave o contraseña invalida.';
+        this.error = translations.ERROR_FAIL_LOGIN;
       },
       next: () => {
         //Stop loading
         this.loading = false;
 
-        //TODO: redirect to dashboard
-        //TODO: implement app initializer
+        //Redirect to dashboard
+        this.router.navigate(['dashboard']);
       },
     });
   }

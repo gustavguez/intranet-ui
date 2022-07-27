@@ -8,7 +8,7 @@ import {
   Firestore,
 } from '@angular/fire/firestore';
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, Subscriber } from 'rxjs';
 import { ApiServiceInterface } from './api-service.interface';
 
 @Injectable({
@@ -30,7 +30,12 @@ export class FirestoreApiService implements ApiServiceInterface {
   }
 
   public getLoggedUser(): Observable<any> {
-    return of(this.fireAuth.currentUser);
+    return new Observable((subscriber: Subscriber<any>) => {
+      this.fireAuth.onAuthStateChanged((response) => {
+        subscriber.next(response);
+        subscriber.complete();
+      });
+    });
   }
 
   //Add document to any collection
