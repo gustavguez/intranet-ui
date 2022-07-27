@@ -3,11 +3,13 @@
     type="email"
     formControlName="username"
     placeholder="Ingrese el email"
+    autocomplete="off"
   />
   <input
     type="password"
     formControlName="password"
     placeholder="Ingrese la clave"
+    autocomplete="off"
   />
   <input type="submit" value="Iniciar sesión" [disabled]="loading" />
   <p style="color: red" *ngIf="error">{{ error }}</p>

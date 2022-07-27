@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { ApiService } from 'src/app/shared/api/api.service';
+import { ApiService } from 'src/app/shared/domain/api.service';
 import { environment } from 'src/environments/environment';
 import translations from '../auth.translations';
 

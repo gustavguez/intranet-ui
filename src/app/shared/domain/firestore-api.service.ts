@@ -31,8 +31,19 @@ export class FirestoreApiService implements ApiServiceInterface {
 
   public getLoggedUser(): Observable<any> {
     return new Observable((subscriber: Subscriber<any>) => {
-      this.fireAuth.onAuthStateChanged((response) => {
-        subscriber.next(response);
+      this.fireAuth.onAuthStateChanged((response: any) => {
+        //Return user data
+        subscriber.next(
+          response
+            ? {
+                id: response.uid,
+                email: response.email,
+                displayName: response.displayName,
+              }
+            : null
+        );
+
+        //Finish observable
         subscriber.complete();
       });
     });
