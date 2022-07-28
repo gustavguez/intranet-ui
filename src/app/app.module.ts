@@ -19,7 +19,6 @@ export function init_app(appInitService: AppInitService): any {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
