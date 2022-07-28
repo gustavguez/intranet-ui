@@ -11,6 +11,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  {
+    path: 'health',
+    loadChildren: () =>
+      import('./health/health.module').then((m) => m.HealthModule),
+  },
 ];
 
 @NgModule({
