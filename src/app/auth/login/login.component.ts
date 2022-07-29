@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ApiService } from 'src/app/shared/domain/api.service';
 import { environment } from 'src/environments/environment';
 import translations from '../auth.translations';
+import { LoginFormInterface } from './login-form.interface';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,15 @@ import translations from '../auth.translations';
 })
 export class LoginComponent {
   //Create login form
-  loginForm: UntypedFormGroup = new UntypedFormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+  loginForm: FormGroup<LoginFormInterface> = new FormGroup<LoginFormInterface>({
+    username: new FormControl('', {
+      validators: Validators.required,
+      nonNullable: true,
+    }),
+    password: new FormControl('', {
+      validators: Validators.required,
+      nonNullable: true,
+    }),
   });
 
   //UI vars
