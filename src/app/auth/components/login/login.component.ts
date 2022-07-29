@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { ApiService } from 'src/app/shared/domain/api.service';
 import { environment } from 'src/environments/environment';
-import translations from '../auth.translations';
+import translations from '../../auth.translations';
 import { LoginFormInterface } from './login-form.interface';
 
 @Component({
