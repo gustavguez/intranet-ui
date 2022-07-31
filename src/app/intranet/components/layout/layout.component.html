@@ -1,6 +1,6 @@
-<app-header title="Intranet"></app-header>
+<app-header title="Intranet" (onNav)="onNav()"></app-header>
 <app-container>
-  <app-nav></app-nav>
+  <app-nav [status]="navStatus"></app-nav>
   <app-sub-container>
     <router-outlet></router-outlet>
   </app-sub-container>

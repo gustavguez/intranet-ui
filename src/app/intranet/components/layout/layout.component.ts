@@ -4,4 +4,11 @@ import { Component } from '@angular/core';
   selector: 'app-layout',
   templateUrl: './layout.component.html',
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+  navStatus: boolean = false;
+
+  //Custome vents
+  onNav(): void {
+    this.navStatus = !this.navStatus;
+  }
+}
