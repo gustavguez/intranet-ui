@@ -5,6 +5,7 @@ import { TableComponent } from './components/table/table.component';
 import { TitleComponent } from './components/title/title.component';
 import { SubContainerComponent } from './components/sub-container/sub-container.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { PanelComponent } from './components/panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { AlertComponent } from './components/alert/alert.component';
     ContainerComponent,
     SubContainerComponent,
     AlertComponent,
+    PanelComponent,
   ],
   exports: [
     TableComponent,

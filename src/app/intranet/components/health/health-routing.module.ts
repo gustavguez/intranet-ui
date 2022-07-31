@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { UnitsComponent } from './components/units/units.component';
+
 const routes: Routes = [
-  // {
-  //   path: 'units',
-  //   component: DashboardComponent,
-  // },
+  {
+    path: 'units',
+    component: UnitsComponent,
+  },
 ];
 
 @NgModule({
