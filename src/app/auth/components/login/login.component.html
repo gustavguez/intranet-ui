@@ -1,21 +1,38 @@
 <div class="login-container">
   <div class="login-form-section">
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <input
-        type="email"
-        formControlName="username"
-        placeholder="Ingrese el email"
-        autocomplete="off"
-      />
-      <input
-        type="password"
-        formControlName="password"
-        placeholder="Ingrese la clave"
-        autocomplete="off"
-      />
-      <input type="submit" value="Iniciar sesión" [disabled]="loading" />
-      <p style="color: red" *ngIf="error">{{ error }}</p>
-    </form>
+    <div class="login-form">
+      <i-feather name="cpu" class="login-icon"></i-feather>
+      <h1 class="h2">Intranet</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            formControlName="username"
+            placeholder="Ingrese el email"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Ingrese la clave"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-dark" [disabled]="loading">
+            <i-feather name="loader" class="icon" *ngIf="loading"></i-feather>
+            Iniciar sesión
+          </button>
+
+          <app-alert [isError]="true" *ngIf="error">{{ error }}</app-alert>
+        </div>
+      </form>
+    </div>
   </div>
   <div class="login-bg-section"></div>
 </div>

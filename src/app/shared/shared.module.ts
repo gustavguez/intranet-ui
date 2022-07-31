@@ -4,6 +4,7 @@ import { ContainerComponent } from './components/container/container.component';
 import { TableComponent } from './components/table/table.component';
 import { TitleComponent } from './components/title/title.component';
 import { SubContainerComponent } from './components/sub-container/sub-container.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -11,12 +12,14 @@ import { SubContainerComponent } from './components/sub-container/sub-container.
     TitleComponent,
     ContainerComponent,
     SubContainerComponent,
+    AlertComponent,
   ],
   exports: [
     TableComponent,
     TitleComponent,
     ContainerComponent,
     SubContainerComponent,
+    AlertComponent,
   ],
   imports: [CommonModule],
 })

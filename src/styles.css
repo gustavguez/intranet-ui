@@ -154,3 +154,40 @@ body {
   width: 100%;
   height: 100vh;
 }
+
+.login-container .login-bg-section {
+  background-image: url(assets/login-bg.jpg);
+  width: 50%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-container .login-form-section {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-container .login-form-section .login-form {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.login-container .login-form-section .login-form .login-icon,
+.login-container .login-form-section .login-form .login-icon svg {
+  width: 150px;
+  height: 150px;
+}
+.login-container .login-form-section .login-form input {
+  margin: 10px 0px;
+}
+.login-container .login-form-section .login-form h1 {
+  margin-bottom: 20px;
+}
+.login-container .login-form-section .login-form .form-group:last-child {
+  text-align: right;
+}
