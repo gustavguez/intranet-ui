@@ -61,7 +61,7 @@ export class LoginComponent {
         this.loading = false;
 
         //Redirect to dashboard
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['intranet']);
       },
     });
   }

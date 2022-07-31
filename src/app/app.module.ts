@@ -7,6 +7,8 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppIconsModule } from './app-icons.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { AppInitService } from './app-init.service';
 
@@ -20,6 +22,8 @@ export function init_app(appInitService: AppInitService): any {
     BrowserModule,
     AppRoutingModule,
     AppIconsModule,
+    CoreModule,
+    SharedModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),

@@ -17,7 +17,7 @@ export class AppInitService {
       this.authService
         .loadSession()
         .subscribe((response: AuthUserInterface | null) => {
-          let state: string = 'dashboard';
+          let state: string = 'intranet';
 
           //Check response
           if (!response) {

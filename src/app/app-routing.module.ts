@@ -7,14 +7,9 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'dashboard',
+    path: 'intranet',
     loadChildren: () =>
-      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-  },
-  {
-    path: 'health',
-    loadChildren: () =>
-      import('./health/health.module').then((m) => m.HealthModule),
+      import('./intranet/intranet.module').then((m) => m.IntranetModule),
   },
 ];
 
