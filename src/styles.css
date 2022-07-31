@@ -191,3 +191,9 @@ body {
 .login-container .login-form-section .login-form .form-group:last-child {
   text-align: right;
 }
+
+.jumbotron {
+  background: #00000012;
+  padding: 23px;
+  border-radius: 25px;
+}

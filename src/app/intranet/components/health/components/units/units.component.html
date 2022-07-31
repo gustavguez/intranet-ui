@@ -1,6 +1,47 @@
 <app-title title="Unidades">
-  <button type="button" class="btn btn-sm btn-outline-secondary">
+  <button
+    *ngIf="!loading"
+    (click)="onShowForm()"
+    type="button"
+    class="btn btn-sm btn-outline-secondary"
+  >
     Agregar
   </button>
 </app-title>
-<app-table></app-table>
+
+<!-- START STATE -->
+<ng-container *ngIf="!displayForm">
+  <app-placeholder *ngIf="!loading && !models.length"></app-placeholder>
+
+  <app-table
+    *ngIf="!loading && models.length"
+    [items]="models"
+    [options]="tableOptions"
+  >
+  </app-table>
+</ng-container>
+
+<!-- START STATE -->
+<ng-container *ngIf="displayForm">
+  <h2 class="subtitle">{{ form.value.id ? "Editar" : "Agregar" }} unidad</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group my-4">
+      <input
+        type="name"
+        class="form-control"
+        formControlName="name"
+        placeholder="Ingrese el nombre"
+      />
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-dark m-2" (click)="onCancelForm()">Volver</button>
+      <button type="submit" class="btn btn-dark" [disabled]="loading">
+        <i-feather name="loader" class="icon" *ngIf="loading"></i-feather>
+        Guardar
+      </button>
+
+      <app-alert [isError]="true" *ngIf="error">{{ error }}</app-alert>
+    </div>
+  </form>
+</ng-container>
