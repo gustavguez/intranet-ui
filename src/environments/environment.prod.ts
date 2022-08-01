@@ -9,6 +9,6 @@ export const environment = {
     messagingSenderId: '134485977552',
   },
   //Uris
-  nutritionUnitsUri: '/nutrition-units',
+  healthUnitsUri: '/health-units',
   production: true,
 };

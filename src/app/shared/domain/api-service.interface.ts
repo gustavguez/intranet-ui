@@ -5,4 +5,5 @@ export interface ApiServiceInterface {
   logout(): Observable<any>;
   getLoggedUser(): Observable<any>;
   add(uri: string, data: any): Observable<any>;
+  fetch(uri: string, params?: any): Observable<any>;
 }

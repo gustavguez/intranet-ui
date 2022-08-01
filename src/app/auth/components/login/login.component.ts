@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ApiService } from 'src/app/shared/domain/api.service';
-import { environment } from 'src/environments/environment';
 import translations from '../../auth.translations';
 import { LoginFormInterface } from './login-form.interface';
 
@@ -43,9 +42,6 @@ export class LoginComponent {
     //Start loading
     this.loading = true;
     this.error = '';
-
-    //Call collection
-    this.apiService.add(environment.nutritionsUnitsUri, { name: 'Gramos' });
 
     //Do auth
     this.apiService.auth(value.username, value.password).subscribe({

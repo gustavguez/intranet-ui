@@ -1,0 +1,8 @@
+<app-modal [state]="state" titleText="Confirmación" (onClose)="onClosePopup()">
+  <h6>¿Estás seguro que deseas continuar?</h6>
+  <div class="popup-footer">
+    <button (click)="onConfirmPopup()" type="button" class="btn btn-danger">
+      Confirmar
+    </button>
+  </div>
+</app-modal>

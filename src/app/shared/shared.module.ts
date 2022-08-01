@@ -9,6 +9,9 @@ import { SubContainerComponent } from './components/sub-container/sub-container.
 import { AlertComponent } from './components/alert/alert.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { PlaceholderComponent } from './components/placeholder/placeholder.compo
     AlertComponent,
     PanelComponent,
     PlaceholderComponent,
+    LoaderComponent,
+    ModalComponent,
+    ConfirmComponent,
   ],
   exports: [
     TableComponent,
@@ -28,6 +34,9 @@ import { PlaceholderComponent } from './components/placeholder/placeholder.compo
     AlertComponent,
     PlaceholderComponent,
     FeatherModule,
+    LoaderComponent,
+    ModalComponent,
+    ConfirmComponent,
   ],
   imports: [CommonModule, FeatherModule],
 })

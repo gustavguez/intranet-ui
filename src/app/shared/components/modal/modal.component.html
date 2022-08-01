@@ -1,0 +1,39 @@
+<!-- Modal -->
+<div [class.show]="state" [class.d-block]="state" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ titleText }}</h5>
+
+        <ng-content select=".popup-header"></ng-content>
+
+        <button
+          type="button"
+          class="btn-close"
+          (click)="onClosePopup()"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+
+      <div class="modal-footer">
+        <ng-content select=".popup-footer"></ng-content>
+
+        <button
+          (click)="onClosePopup()"
+          type="button"
+          class="btn btn-secondary"
+        >
+          {{ closeText ? closeText : "Cerrar" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal-backdrop fade show"
+  *ngIf="state"
+  (click)="onClosePopup()"
+></div>

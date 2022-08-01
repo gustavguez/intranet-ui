@@ -6,9 +6,11 @@ import {
   collection,
   CollectionReference,
   Firestore,
+  getDocs,
+  Query,
+  query,
 } from '@angular/fire/firestore';
-import { getAuth, onAuthStateChanged } from '@firebase/auth';
-import { from, Observable, of, Subscriber } from 'rxjs';
+import { from, map, Observable, Subscriber } from 'rxjs';
 import { ApiServiceInterface } from './api-service.interface';
 
 @Injectable({
@@ -58,7 +60,35 @@ export class FirestoreApiService implements ApiServiceInterface {
     );
 
     //Return add document
-    return from(addDoc(collectionRef, data));
+    return from(addDoc(collectionRef, data)).pipe(
+      map((response: any) => {
+        //add the id and return the same data
+        data.id = response.id;
+        return data;
+      })
+    );
+  }
+
+  //Fetch collection
+  public fetch(uri: string, parms?: any): Observable<any> {
+    const collectionName: string = this.uriToCollection(uri);
+    const collectionRef: CollectionReference = collection(
+      this.fireStore,
+      collectionName
+    );
+
+    const q: Query = query(collectionRef);
+
+    //Return add document
+    return from(getDocs(q)).pipe(
+      map((response: any) => {
+        const data: any[] = [];
+        response.forEach((doc: any) => {
+          data.push({ id: doc.id, ...doc.data() });
+        });
+        return data;
+      })
+    );
   }
 
   private uriToCollection(uri: string): string {
