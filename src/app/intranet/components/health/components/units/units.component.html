@@ -18,6 +18,7 @@
     *ngIf="!loading && models.length"
     [items]="models"
     [options]="tableOptions"
+    (onAction)="onAction($event)"
   >
   </app-table>
 </ng-container>

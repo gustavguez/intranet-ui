@@ -5,12 +5,18 @@ import {
   addDoc,
   collection,
   CollectionReference,
+  DocumentReference,
   Firestore,
+  getDoc,
   getDocs,
   Query,
   query,
+  DocumentSnapshot,
+  DocumentData,
+  updateDoc,
 } from '@angular/fire/firestore';
-import { from, map, Observable, Subscriber } from 'rxjs';
+import { doc } from '@firebase/firestore';
+import { from, map, mergeMap, Observable, Subscriber } from 'rxjs';
 import { ApiServiceInterface } from './api-service.interface';
 
 @Injectable({
@@ -64,6 +70,24 @@ export class FirestoreApiService implements ApiServiceInterface {
       map((response: any) => {
         //add the id and return the same data
         data.id = response.id;
+        return data;
+      })
+    );
+  }
+
+  //Add document to any collection
+  public edit(uri: string, id: string, data: any): Observable<any> {
+    const collectionName: string = this.uriToCollection(uri);
+    const documentRef: DocumentReference = doc(
+      this.fireStore,
+      `${collectionName}/${id}`
+    );
+
+    //Return add document
+    return from(updateDoc(documentRef, data)).pipe(
+      map((response: any) => {
+        //add the id and return the same data
+        data.id = id;
         return data;
       })
     );

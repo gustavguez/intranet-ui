@@ -24,6 +24,10 @@ export class ApiService {
     return this.firestoreApi.add(uri, data);
   }
 
+  public edit(uri: string, id: string, data: any): Observable<any> {
+    return this.firestoreApi.edit(uri, id, data);
+  }
+
   public fetch(uri: string, params?: any): Observable<any> {
     return this.firestoreApi.fetch(uri, params);
   }

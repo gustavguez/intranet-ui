@@ -5,6 +5,7 @@
         <th scope="col" *ngFor="let header of options.headers">
           {{ header.display }}
         </th>
+        <th *ngIf="options.actions && options.actions.length"></th>
       </tr>
     </thead>
     <tbody *ngIf="items && items.length">
@@ -15,7 +16,26 @@
               customTdTpl ? customTdTpl : defaultTdTpl;
               context: { field: field, model: item }
             "
-          ></ng-container>
+          >
+          </ng-container>
+        </td>
+        <td
+          class="align-middle"
+          *ngIf="options.actions && options.actions.length"
+        >
+          <ng-container *ngFor="let action of options.actions">
+            <button
+              *ngIf="action.mustDisplay(item)"
+              [disabled]="action.mustDisable(item)"
+              [title]="action.text"
+              (click)="onActionClick(action, item)"
+              class="btn btn-{{ action.status }} ml-1 {{ action.btnClasses }}"
+            >
+              <span *ngIf="action.icon">
+                <i-feather [name]="action.icon" class="icon"></i-feather>
+              </span>
+            </button>
+          </ng-container>
         </td>
       </tr>
     </tbody>

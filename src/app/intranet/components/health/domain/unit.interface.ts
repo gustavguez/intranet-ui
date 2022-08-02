@@ -1,5 +1,5 @@
 export interface Unit {
-  id?: number;
+  id?: string;
   name: string;
   plural: string;
 }
