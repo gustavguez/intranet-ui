@@ -12,6 +12,7 @@ import { PlaceholderComponent } from './components/placeholder/placeholder.compo
 import { LoaderComponent } from './components/loader/loader.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
     LoaderComponent,
     ModalComponent,
     ConfirmComponent,
+    PanelComponent,
   ],
-  imports: [CommonModule, FeatherModule],
+  imports: [CommonModule, FeatherModule, ReactiveFormsModule],
 })
 export class SharedModule {}
