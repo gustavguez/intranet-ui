@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, UntypedFormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
 import { ApiService } from '../../domain/api.service';
 import { Model } from '../../domain/model.interface';
 import { TableActionArgument } from '../table/domain/table-action.argument';
+import { TableActionModel } from '../table/domain/table-action.model';
 import { TableDeleteActionModel } from '../table/domain/table-delete-action.model';
 import { TableEditActionModel } from '../table/domain/table-edit-action.model';
 import { PanelOptions } from './panel-options.interface';
@@ -15,7 +16,10 @@ export class PanelComponent implements OnInit {
   //Inputs
   @Input() options?: PanelOptions = {};
   @Input() form?: UntypedFormGroup;
-  @Input() updateModel?: (json: any, model: Model) => void;
+  @Input() updateModel?: (json: any, model: any) => void;
+
+  //Outputs
+  @Output() onAction: EventEmitter<TableActionArgument> = new EventEmitter();
 
   //Models
   loading: boolean = true;
@@ -75,7 +79,7 @@ export class PanelComponent implements OnInit {
     this.deleteModel();
   }
 
-  onAction(args: TableActionArgument): void {
+  onTableAction(args: TableActionArgument): void {
     //Check instance of
     if (args.action instanceof TableEditActionModel) {
       this.editModel(args.model);
@@ -85,6 +89,9 @@ export class PanelComponent implements OnInit {
       this.loadDeleteModel(args.model);
       return;
     }
+
+    //Default emit to parent
+    this.onAction.emit(args);
   }
 
   //Helper functions

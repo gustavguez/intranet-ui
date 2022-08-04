@@ -43,8 +43,8 @@ export class UnitsComponent {
   constructor() {}
 
   //Function to parse model
-  updateModel(json: any, model: Model): void {
-    (<Unit>model).name = json.name;
-    (<Unit>model).plural = json.plural;
+  updateModel(json: any, model: Unit): void {
+    model.name = json.name;
+    model.plural = json.plural;
   }
 }
