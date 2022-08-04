@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TableActionArgument } from 'src/app/shared/components/table/domain/table-action.argument';
+import { TableDeleteActionModel } from 'src/app/shared/components/table/domain/table-delete-action.model';
 import { TableEditActionModel } from 'src/app/shared/components/table/domain/table-edit-action.model';
 import { TableHeaderModel } from 'src/app/shared/components/table/domain/table-header.model';
 import { TableOptionsModel } from 'src/app/shared/components/table/domain/table-options.model';
@@ -21,13 +22,14 @@ export class UnitsComponent implements OnInit {
   displayForm: boolean = false;
   tableOptions: TableOptionsModel = {
     fields: ['name', 'plural'],
-    actions: [new TableEditActionModel()],
+    actions: [new TableEditActionModel(), new TableDeleteActionModel()],
     headers: [
       new TableHeaderModel('Nombre'),
       new TableHeaderModel('Nombre en plural'),
     ],
   };
   models: Unit[] = [];
+  modelToDelete: Unit | null = null;
   form: FormGroup<UnitForm> = new FormGroup({
     id: new FormControl(),
     name: new FormControl('', {
@@ -82,10 +84,23 @@ export class UnitsComponent implements OnInit {
     this.saveModel(id, obj);
   }
 
+  onCloseDeleteDialog(): void {
+    this.modelToDelete = null;
+  }
+
+  onConfirmDeleteDialog(): void {
+    this.deleteModel();
+  }
+
   onAction(args: TableActionArgument): void {
     //Check instance of
     if (args.action instanceof TableEditActionModel) {
       this.editModel(args.model);
+      return;
+    }
+    if (args.action instanceof TableDeleteActionModel) {
+      this.loadDeleteModel(args.model);
+      return;
     }
   }
 
@@ -116,6 +131,11 @@ export class UnitsComponent implements OnInit {
 
     //Show form
     this.displayForm = true;
+  }
+
+  private loadDeleteModel(model: Unit): void {
+    //Load model to delete
+    this.modelToDelete = model;
   }
 
   private saveModel(id: string, value: any): void {
@@ -158,6 +178,45 @@ export class UnitsComponent implements OnInit {
         },
       });
     }
+  }
+
+  private deleteModel(): void {
+    const modelToDelete: Unit | null = this.modelToDelete;
+
+    //Clear modelToDelete
+    this.modelToDelete = null;
+
+    //Check model to delete
+    if (!modelToDelete?.id) {
+      return;
+    }
+
+    //Start loading
+    this.loading = true;
+
+    //Do delete
+    this.apiService
+      .delete(environment.healthUnitsUri, modelToDelete.id)
+      .subscribe({
+        next: (response: any) => {
+          //Load data
+          const index: number = this.models.findIndex((unit: Unit) => {
+            return unit.id == modelToDelete.id;
+          });
+
+          //Check index
+          if (index > -1) {
+            this.models.splice(index, 1);
+          }
+
+          //Stop loading
+          this.loading = false;
+        },
+        error: (error: any) => {
+          //Stop loading
+          this.loading = false;
+        },
+      });
   }
 
   private closeForm(): void {

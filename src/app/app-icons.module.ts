@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { FeatherModule } from 'angular-feather';
-import { Home, Box, LogOut, Cpu, Edit } from 'angular-feather/icons';
+import { Home, Box, LogOut, Cpu, Edit, Trash2 } from 'angular-feather/icons';
 
 @NgModule({
   declarations: [],
@@ -12,6 +12,7 @@ import { Home, Box, LogOut, Cpu, Edit } from 'angular-feather/icons';
       Box,
       LogOut,
       Edit,
+      Trash2,
     }),
   ],
   exports: [FeatherModule],

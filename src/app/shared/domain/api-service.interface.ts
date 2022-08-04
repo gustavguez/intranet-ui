@@ -6,5 +6,6 @@ export interface ApiServiceInterface {
   getLoggedUser(): Observable<any>;
   add(uri: string, data: any): Observable<any>;
   edit(uri: string, id: string, data: any): Observable<any>;
+  delete(uri: string, id: string): Observable<any>;
   fetch(uri: string, params?: any): Observable<any>;
 }

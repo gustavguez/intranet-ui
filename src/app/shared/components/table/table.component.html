@@ -29,7 +29,7 @@
               [disabled]="action.mustDisable(item)"
               [title]="action.text"
               (click)="onActionClick(action, item)"
-              class="btn btn-{{ action.status }} ml-1 {{ action.btnClasses }}"
+              class="btn btn-{{ action.status }} mx-2 {{ action.btnClasses }}"
             >
               <span *ngIf="action.icon">
                 <i-feather [name]="action.icon" class="icon"></i-feather>

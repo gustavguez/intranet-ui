@@ -7,7 +7,7 @@ export class TableDeleteActionModel extends TableActionModel {
     mustDisableCallback?: (model: any) => boolean
   ) {
     // Call parent constructor
-    super('fas fa-trash', 'Eliminar', mustDisplayCallback, mustDisableCallback);
+    super('trash-2', 'Eliminar', mustDisplayCallback, mustDisableCallback);
 
     //By default danger status
     this.status = StatusEnum.DANGER;

@@ -14,6 +14,7 @@ import {
   DocumentSnapshot,
   DocumentData,
   updateDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { doc } from '@firebase/firestore';
 import { from, map, mergeMap, Observable, Subscriber } from 'rxjs';
@@ -89,6 +90,22 @@ export class FirestoreApiService implements ApiServiceInterface {
         //add the id and return the same data
         data.id = id;
         return data;
+      })
+    );
+  }
+
+  //Add document to any collection
+  public delete(uri: string, id: string): Observable<any> {
+    const collectionName: string = this.uriToCollection(uri);
+    const documentRef: DocumentReference = doc(
+      this.fireStore,
+      `${collectionName}/${id}`
+    );
+
+    //Return add document
+    return from(deleteDoc(documentRef)).pipe(
+      map((response: any) => {
+        return true;
       })
     );
   }

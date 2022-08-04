@@ -62,4 +62,9 @@
 </ng-container>
 
 <!-- DATA TO BE DELETED STATE -->
-<!-- <app-confirm [state]="true"></app-confirm> -->
+<app-confirm
+  [state]="!!modelToDelete"
+  (onClose)="onCloseDeleteDialog()"
+  (onConfirm)="onConfirmDeleteDialog()"
+>
+</app-confirm>

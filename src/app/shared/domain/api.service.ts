@@ -28,6 +28,10 @@ export class ApiService {
     return this.firestoreApi.edit(uri, id, data);
   }
 
+  public delete(uri: string, id: string): Observable<any> {
+    return this.firestoreApi.delete(uri, id);
+  }
+
   public fetch(uri: string, params?: any): Observable<any> {
     return this.firestoreApi.fetch(uri, params);
   }
