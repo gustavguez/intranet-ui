@@ -3,7 +3,6 @@ import { UntypedFormGroup } from '@angular/forms';
 import { ApiService } from '../../domain/api.service';
 import { Model } from '../../domain/model.interface';
 import { TableActionArgument } from '../table/domain/table-action.argument';
-import { TableActionModel } from '../table/domain/table-action.model';
 import { TableDeleteActionModel } from '../table/domain/table-delete-action.model';
 import { TableEditActionModel } from '../table/domain/table-edit-action.model';
 import { PanelOptions } from './panel-options.interface';

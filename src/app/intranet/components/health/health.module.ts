@@ -6,9 +6,10 @@ import { UnitsComponent } from './components/units/units.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FeatherModule } from 'angular-feather';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductsComponent } from './components/products/products.component';
 
 @NgModule({
-  declarations: [UnitsComponent],
+  declarations: [UnitsComponent, ProductsComponent],
   imports: [
     CommonModule,
     HealthRoutingModule,

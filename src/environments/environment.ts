@@ -14,6 +14,7 @@ export const environment = {
   },
   //Uris
   healthUnitsUri: '/health-units',
+  healthProductsUri: '/health-products',
   production: false,
 };
 
