@@ -7,17 +7,14 @@ import {
   CollectionReference,
   DocumentReference,
   Firestore,
-  getDoc,
   getDocs,
   Query,
   query,
-  DocumentSnapshot,
-  DocumentData,
   updateDoc,
   deleteDoc,
 } from '@angular/fire/firestore';
 import { doc } from '@firebase/firestore';
-import { from, map, mergeMap, Observable, Subscriber } from 'rxjs';
+import { from, map, Observable, Subscriber } from 'rxjs';
 import { ApiServiceInterface } from './api-service.interface';
 
 @Injectable({

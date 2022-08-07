@@ -7,9 +7,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FeatherModule } from 'angular-feather';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsComponent } from './components/products/products.component';
+import { RecipeTypesComponent } from './components/recipe-types/recipe-types.component';
 
 @NgModule({
-  declarations: [UnitsComponent, ProductsComponent],
+  declarations: [UnitsComponent, ProductsComponent, RecipeTypesComponent],
   imports: [
     CommonModule,
     HealthRoutingModule,

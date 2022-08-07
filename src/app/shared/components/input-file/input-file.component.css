@@ -1,0 +1,32 @@
+input {
+  visibility: visible;
+  position: absolute;
+  left: 0px;
+  opacity: 0;
+  width: calc(100% - 50px);
+}
+
+.form-control {
+  /* height: 50px; */
+  padding: 6px 3px;
+  position: relative;
+}
+
+.filename {
+  padding-left: 10px;
+  width: calc(100% - 90px);
+  display: inline-block;
+  height: 25px;
+  overflow: hidden;
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+.btn-delete {
+  float: right;
+  margin-top: -6px;
+}
+
+.input-placeholder {
+  color: #6c757c;
+}

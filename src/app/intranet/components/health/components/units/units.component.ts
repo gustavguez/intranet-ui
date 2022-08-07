@@ -4,7 +4,6 @@ import { PanelOptions } from 'src/app/shared/components/panel/panel-options.inte
 import { TableDeleteActionModel } from 'src/app/shared/components/table/domain/table-delete-action.model';
 import { TableEditActionModel } from 'src/app/shared/components/table/domain/table-edit-action.model';
 import { TableHeaderModel } from 'src/app/shared/components/table/domain/table-header.model';
-import { Model } from 'src/app/shared/domain/model.interface';
 import { environment } from 'src/environments/environment';
 import { UnitForm } from '../../domain/unit-form.interface';
 import { Unit } from '../../domain/unit.interface';

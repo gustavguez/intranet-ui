@@ -1,0 +1,29 @@
+<div class="form-control">
+  <input #file (change)="onEmitChange()" type="file" />
+
+  <span class="filename">
+    <span
+      *ngIf="form.get(controlFilename)?.value && !form.get(controlName)?.value"
+    >
+      {{ form.get(controlFilename)?.value }}
+    </span>
+    <span *ngIf="form.get(controlName)?.value">
+      {{ form.get(controlName)?.value.name }}
+    </span>
+    <span
+      class="input-placeholder"
+      *ngIf="!form.get(controlFilename)?.value && !form.get(controlName)?.value"
+    >
+      Seleccione un archivo
+    </span>
+  </span>
+
+  <a
+    tabindex="-1"
+    *ngIf="form.get(controlFilename)?.value || form.get(controlName)?.value"
+    (click)="onClear()"
+    class="btn btn-delete"
+  >
+    x
+  </a>
+</div>

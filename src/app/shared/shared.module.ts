@@ -13,6 +13,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputFileComponent } from './components/input-file/input-file.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoaderComponent,
     ModalComponent,
     ConfirmComponent,
+    InputFileComponent,
   ],
   exports: [
     TableComponent,
@@ -39,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ModalComponent,
     ConfirmComponent,
     PanelComponent,
+    InputFileComponent,
   ],
   imports: [CommonModule, FeatherModule, ReactiveFormsModule],
 })
