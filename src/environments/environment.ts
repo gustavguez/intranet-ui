@@ -16,6 +16,7 @@ export const environment = {
   healthUnitsUri: '/health-units',
   healthProductsUri: '/health-products',
   healthRecipeTypesUri: '/health-recipe-types',
+  healthRecipesUri: '/health-recipes',
   production: false,
 };
 

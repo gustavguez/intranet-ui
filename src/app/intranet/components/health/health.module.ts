@@ -8,9 +8,10 @@ import { FeatherModule } from 'angular-feather';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsComponent } from './components/products/products.component';
 import { RecipeTypesComponent } from './components/recipe-types/recipe-types.component';
+import { RecipesComponent } from './components/recipes/recipes.component';
 
 @NgModule({
-  declarations: [UnitsComponent, ProductsComponent, RecipeTypesComponent],
+  declarations: [UnitsComponent, ProductsComponent, RecipeTypesComponent, RecipesComponent],
   imports: [
     CommonModule,
     HealthRoutingModule,

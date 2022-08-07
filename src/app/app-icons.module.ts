@@ -10,6 +10,7 @@ import {
   Trash2,
   Package,
   Folder,
+  FileText,
 } from 'angular-feather/icons';
 
 @NgModule({
@@ -24,6 +25,7 @@ import {
       Trash2,
       Package,
       Folder,
+      FileText,
     }),
   ],
   exports: [FeatherModule],
