@@ -8,13 +8,21 @@
         placeholder="Ingrese el nombre"
       />
     </div>
-    <div class="form-group my-4">
+    <div class="input-group my-4">
       <input
         type="url"
         class="form-control"
         formControlName="pictureUrl"
         placeholder="Ingrese la URL de la foto"
       />
+      <div class="input-group-append">
+        <button (click)="onOpenGoogleDriveUrl()" class="btn mx-2 google-drive">
+          &nbsp;
+        </button>
+      </div>
     </div>
   </div>
 </app-panel>
+
+<app-google-drive-url (onConfirm)="onConfirmGoogleDriveUrl($event)">
+</app-google-drive-url>

@@ -1,0 +1,22 @@
+<app-modal
+  [state]="state"
+  titleText="Foto desde Google Drive"
+  (onClose)="onClosePopup()"
+>
+  <div [formGroup]="form">
+    <div class="form-group my-4">
+      <input
+        type="url"
+        class="form-control"
+        formControlName="url"
+        placeholder="Ingrese la url"
+      />
+    </div>
+  </div>
+
+  <div class="popup-footer">
+    <button (click)="onSubmit()" type="button" class="btn btn-danger">
+      Confirmar
+    </button>
+  </div>
+</app-modal>

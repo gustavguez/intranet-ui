@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GoogleDriveUrlService } from 'src/app/shared/components/google-drive-url/google-drive-url.service';
 
 import { PanelOptions } from 'src/app/shared/components/panel/panel-options.interface';
 import { TableDeleteActionModel } from 'src/app/shared/components/table/domain/table-delete-action.model';
@@ -17,6 +18,7 @@ export class ProductsComponent {
   //Models
   options: PanelOptions = {
     title: 'Productos',
+    entity: 'producto',
     endpoint: environment.healthProductsUri,
     tableOptions: {
       fields: ['name'],
@@ -36,11 +38,18 @@ export class ProductsComponent {
   });
 
   //Inject services
-  constructor() {}
+  constructor(private googleDriveUrlService: GoogleDriveUrlService) {}
 
   //Function to parse model
   updateModel(json: any, model: Product): void {
     model.name = json.name;
     model.pictureUrl = json.pictureUrl;
+  }
+
+  onOpenGoogleDriveUrl(): void {
+    this.googleDriveUrlService.changeState(true);
+  }
+  onConfirmGoogleDriveUrl(url: string): void {
+    this.form.patchValue({ pictureUrl: url });
   }
 }

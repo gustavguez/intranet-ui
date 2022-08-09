@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GoogleDriveUrlService } from 'src/app/shared/components/google-drive-url/google-drive-url.service';
 import { PanelOptions } from 'src/app/shared/components/panel/panel-options.interface';
 import { TableDeleteActionModel } from 'src/app/shared/components/table/domain/table-delete-action.model';
 import { TableEditActionModel } from 'src/app/shared/components/table/domain/table-edit-action.model';
@@ -16,6 +17,7 @@ export class RecipesComponent {
   //Models
   options: PanelOptions = {
     title: 'Recetas',
+    entity: 'receta',
     endpoint: environment.healthRecipesUri,
     tableOptions: {
       fields: ['title'],
@@ -29,13 +31,29 @@ export class RecipesComponent {
       validators: Validators.required,
       nonNullable: true,
     }),
+    content: new FormControl('', {
+      validators: Validators.required,
+      nonNullable: true,
+    }),
+    pictureUrl: new FormControl('', {
+      validators: Validators.required,
+      nonNullable: true,
+    }),
   });
 
   //Inject services
-  constructor() {}
+  constructor(private googleDriveUrlService: GoogleDriveUrlService) {}
 
   //Function to parse model
   updateModel(json: any, model: Recipe): void {
     model.title = json.title;
+  }
+
+  onOpenGoogleDriveUrl(): void {
+    this.googleDriveUrlService.changeState(true);
+  }
+
+  onConfirmGoogleDriveUrl(url: string): void {
+    this.form.patchValue({ pictureUrl: url });
   }
 }

@@ -14,6 +14,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputFileComponent } from './components/input-file/input-file.component';
+import { GoogleDriveUrlComponent } from './components/google-drive-url/google-drive-url.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { InputFileComponent } from './components/input-file/input-file.component
     ModalComponent,
     ConfirmComponent,
     InputFileComponent,
+    GoogleDriveUrlComponent,
   ],
   exports: [
     TableComponent,
@@ -42,6 +44,7 @@ import { InputFileComponent } from './components/input-file/input-file.component
     ConfirmComponent,
     PanelComponent,
     InputFileComponent,
+    GoogleDriveUrlComponent,
   ],
   imports: [CommonModule, FeatherModule, ReactiveFormsModule],
 })

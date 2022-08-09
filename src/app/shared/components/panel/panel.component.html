@@ -33,7 +33,9 @@
 
 <!-- FORM STATE -->
 <ng-container *ngIf="displayForm && form">
-  <h2 class="subtitle">{{ form.value.id ? "Editar" : "Agregar" }} unidad</h2>
+  <h2 class="subtitle">
+    {{ form.value.id ? "Editar" : "Agregar" }} {{ options?.entity }}
+  </h2>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <ng-content select=".form"></ng-content>
 

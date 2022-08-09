@@ -16,6 +16,7 @@ export class RecipeTypesComponent {
   //Models
   options: PanelOptions = {
     title: 'Categorías de recetas',
+    entity: 'categoría',
     endpoint: environment.healthRecipeTypesUri,
     tableOptions: {
       fields: ['name'],

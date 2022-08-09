@@ -197,3 +197,11 @@ body {
   padding: 23px;
   border-radius: 25px;
 }
+
+.google-drive {
+  width: 60px;
+  background-image: url("assets/google-drive.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

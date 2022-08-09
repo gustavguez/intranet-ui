@@ -16,6 +16,7 @@ export class UnitsComponent {
   //Models
   options: PanelOptions = {
     title: 'Unidades',
+    entity: 'unidad',
     endpoint: environment.healthUnitsUri,
     tableOptions: {
       fields: ['name', 'plural'],
