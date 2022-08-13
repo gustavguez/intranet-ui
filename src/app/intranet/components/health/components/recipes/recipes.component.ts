@@ -10,6 +10,7 @@ import { RecipeForm } from './recipe-form.interface';
 import { Recipe } from '../../domain/recipe.interface';
 import { Product } from '../../domain/product.interface';
 import { Unit } from '../../domain/unit.interface';
+import { PanelRemoteDependency } from 'src/app/shared/components/panel/panel-remote-dependency.interface';
 
 @Component({
   selector: 'app-recipes',
@@ -26,6 +27,10 @@ export class RecipesComponent {
       actions: [new TableEditActionModel(), new TableDeleteActionModel()],
       headers: [new TableHeaderModel('Título')],
     },
+    remoteDependencies: [
+      { endpoint: environment.healthProductsUri, key: 'products' },
+      { endpoint: environment.healthUnitsUri, key: 'units' },
+    ],
   };
 
   form: FormGroup<RecipeForm> = new FormGroup({
@@ -45,17 +50,8 @@ export class RecipesComponent {
     ingredients: new FormArray<any>([]),
   });
 
-  products: Product[] = [
-    { id: '1', name: 'Manzana 1', pictureUrl: '' },
-    { id: '2', name: 'Manzana 2', pictureUrl: '' },
-    { id: '3', name: 'Manzana 3', pictureUrl: '' },
-    { id: '4', name: 'Manzana 4', pictureUrl: '' },
-  ];
-  units: Unit[] = [
-    { id: '1', name: 'Cuchara 1', plural: 'Cucharas 1' },
-    { id: '2', name: 'Cuchara 2', plural: 'Cucharas 2' },
-    { id: '3', name: 'Cuchara 3', plural: 'Cucharas 3' },
-  ];
+  products: Product[] = [];
+  units: Unit[] = [];
 
   //Inject services
   constructor(private googleDriveUrlService: GoogleDriveUrlService) {}
@@ -108,6 +104,18 @@ export class RecipesComponent {
 
     if (product) {
       ingredients.get([index, 'product'])?.patchValue(product);
+    }
+  }
+
+  onRemoteDependenciesEnd(dependencies: PanelRemoteDependency[]): void {
+    if (dependencies instanceof Array) {
+      dependencies.forEach((dependency: PanelRemoteDependency) => {
+        if (dependency.key === 'products') {
+          this.products = <Product[]>dependency.data;
+        } else if (dependency.key === 'units') {
+          this.units = <Unit[]>dependency.data;
+        }
+      });
     }
   }
 

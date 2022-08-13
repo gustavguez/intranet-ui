@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { forkJoin, map, mergeMap, Observable, Observer, of, tap } from 'rxjs';
 import { ApiService } from '../../domain/api.service';
 import { Model } from '../../domain/model.interface';
 import { TableActionArgument } from '../table/domain/table-action.argument';
 import { TableDeleteActionModel } from '../table/domain/table-delete-action.model';
 import { TableEditActionModel } from '../table/domain/table-edit-action.model';
 import { PanelOptions } from './panel-options.interface';
+import { PanelRemoteDependency } from './panel-remote-dependency.interface';
 
 @Component({
   selector: 'app-panel',
@@ -19,6 +21,9 @@ export class PanelComponent implements OnInit {
 
   //Outputs
   @Output() onAction: EventEmitter<TableActionArgument> = new EventEmitter();
+  @Output() onOpenForm: EventEmitter<any> = new EventEmitter();
+  @Output() onRemoteDependenciesEnd: EventEmitter<PanelRemoteDependency[]> =
+    new EventEmitter();
 
   //Models
   loading: boolean = true;
@@ -33,8 +38,24 @@ export class PanelComponent implements OnInit {
 
   //On component init
   ngOnInit(): void {
+    //Set loading
+    this.loading = true;
+
     //Fetch data
-    this.fetchData();
+    this.fetchData()
+      .pipe(
+        //Fetch remote dependencies
+        mergeMap(() => {
+          if (!this.hasRemoteDependencies()) {
+            return of(true);
+          }
+          return this.fetchRemoteDependencies();
+        })
+      )
+      .subscribe(() => {
+        //Set loading
+        this.loading = false;
+      });
   }
 
   //Custom events
@@ -43,6 +64,9 @@ export class PanelComponent implements OnInit {
   }
 
   onShowForm(): void {
+    //Emit event
+    this.onOpenForm.emit();
+
     //Display form
     this.displayForm = true;
 
@@ -94,27 +118,55 @@ export class PanelComponent implements OnInit {
   }
 
   //Helper functions
-  private fetchData(): void {
-    //Set loading
-    this.loading = true;
-
+  private fetchData(): Observable<any> {
     //Do request
-    this.apiService.fetch(this.options?.endpoint ?? '').subscribe({
-      next: (response: any) => {
+    return this.apiService.fetch(this.options?.endpoint ?? '').pipe(
+      tap((response: any) => {
         //Load data
         this.models = <Model[]>response ?? [];
+      })
+    );
+  }
 
-        //Stop loading
-        this.loading = false;
-      },
-      error: () => {
-        //Stop loading
-        this.loading = false;
-      },
-    });
+  private fetchRemoteDependencies(): Observable<PanelRemoteDependency[]> {
+    //Do request
+    const observables: Observable<any>[] = [];
+
+    //Do a fetch for each dependecy
+    if (this.options?.remoteDependencies instanceof Array) {
+      this.options?.remoteDependencies.forEach(
+        (dependency: PanelRemoteDependency) => {
+          observables.push(
+            this.apiService.fetch(dependency.endpoint).pipe(
+              map((response: any) => {
+                dependency.data = response;
+                return dependency;
+              })
+            )
+          );
+        }
+      );
+    }
+
+    //Join dependencies
+    return forkJoin(observables).pipe(
+      tap((dependencies: PanelRemoteDependency[]) =>
+        this.onRemoteDependenciesEnd.emit(dependencies)
+      )
+    );
+  }
+
+  private hasRemoteDependencies(): boolean {
+    return !!(
+      this.options?.remoteDependencies &&
+      this.options?.remoteDependencies?.length > 0
+    );
   }
 
   private editModel(model: Model): void {
+    //Emit event
+    this.onOpenForm.emit();
+
     //Load form
     this.form?.patchValue(model);
 

@@ -1,4 +1,9 @@
-<app-panel [options]="options" [form]="form" [updateModel]="updateModel">
+<app-panel
+  [options]="options"
+  [form]="form"
+  [updateModel]="updateModel"
+  (onRemoteDependenciesEnd)="onRemoteDependenciesEnd($event)"
+>
   <div class="form" [formGroup]="form">
     <div class="form-group my-4">
       <input
