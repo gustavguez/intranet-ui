@@ -7,7 +7,7 @@ import { TableDeleteActionModel } from 'src/app/shared/components/table/domain/t
 import { TableEditActionModel } from 'src/app/shared/components/table/domain/table-edit-action.model';
 import { TableHeaderModel } from 'src/app/shared/components/table/domain/table-header.model';
 import { environment } from 'src/environments/environment';
-import { ProductForm } from '../../domain/product-form.interface';
+import { ProductForm } from './product-form.interface';
 import { Product } from '../../domain/product.interface';
 
 @Component({

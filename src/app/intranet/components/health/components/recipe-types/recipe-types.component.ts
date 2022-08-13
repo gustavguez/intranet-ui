@@ -5,7 +5,7 @@ import { TableDeleteActionModel } from 'src/app/shared/components/table/domain/t
 import { TableEditActionModel } from 'src/app/shared/components/table/domain/table-edit-action.model';
 import { TableHeaderModel } from 'src/app/shared/components/table/domain/table-header.model';
 import { environment } from 'src/environments/environment';
-import { RecipeTypeForm } from '../../domain/recipe-type-form.interface';
+import { RecipeTypeForm } from './recipe-type-form.interface';
 import { RecipeType } from '../../domain/recipe-type.interface';
 
 @Component({

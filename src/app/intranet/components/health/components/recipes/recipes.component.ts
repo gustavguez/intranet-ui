@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GoogleDriveUrlService } from 'src/app/shared/components/google-drive-url/google-drive-url.service';
 import { PanelOptions } from 'src/app/shared/components/panel/panel-options.interface';
 import { TableDeleteActionModel } from 'src/app/shared/components/table/domain/table-delete-action.model';
 import { TableEditActionModel } from 'src/app/shared/components/table/domain/table-edit-action.model';
 import { TableHeaderModel } from 'src/app/shared/components/table/domain/table-header.model';
 import { environment } from 'src/environments/environment';
-import { RecipeForm } from '../../domain/recipe-form.interface';
+import { RecipeForm } from './recipe-form.interface';
 import { Recipe } from '../../domain/recipe.interface';
+import { Product } from '../../domain/product.interface';
+import { Unit } from '../../domain/unit.interface';
 
 @Component({
   selector: 'app-recipes',
@@ -25,6 +27,7 @@ export class RecipesComponent {
       headers: [new TableHeaderModel('Título')],
     },
   };
+
   form: FormGroup<RecipeForm> = new FormGroup({
     id: new FormControl(),
     title: new FormControl('', {
@@ -39,7 +42,20 @@ export class RecipesComponent {
       validators: Validators.required,
       nonNullable: true,
     }),
+    ingredients: new FormArray<any>([]),
   });
+
+  products: Product[] = [
+    { id: '1', name: 'Manzana 1', pictureUrl: '' },
+    { id: '2', name: 'Manzana 2', pictureUrl: '' },
+    { id: '3', name: 'Manzana 3', pictureUrl: '' },
+    { id: '4', name: 'Manzana 4', pictureUrl: '' },
+  ];
+  units: Unit[] = [
+    { id: '1', name: 'Cuchara 1', plural: 'Cucharas 1' },
+    { id: '2', name: 'Cuchara 2', plural: 'Cucharas 2' },
+    { id: '3', name: 'Cuchara 3', plural: 'Cucharas 3' },
+  ];
 
   //Inject services
   constructor(private googleDriveUrlService: GoogleDriveUrlService) {}
@@ -49,11 +65,36 @@ export class RecipesComponent {
     model.title = json.title;
   }
 
+  getIngredients(): FormArray {
+    return <FormArray>this.form.get('ingredients');
+  }
+
   onOpenGoogleDriveUrl(): void {
     this.googleDriveUrlService.changeState(true);
   }
 
   onConfirmGoogleDriveUrl(url: string): void {
     this.form.patchValue({ pictureUrl: url });
+  }
+
+  onAddIngredient(): void {
+    const ingredients: FormArray = this.getIngredients();
+    ingredients.push(this.getIngredientFormGroup());
+  }
+
+  onRemoveIngredient(index: number): void {
+    const ingredients: FormArray = this.getIngredients();
+    ingredients.removeAt(index);
+  }
+
+  //private methods
+  private getIngredientFormGroup(value?: any): FormGroup {
+    return new FormGroup({
+      productId: new FormControl(value?.productId ?? ''),
+      unitId: new FormControl(value?.unitId ?? ''),
+      quantity: new FormControl(value?.quantity ?? ''),
+      product: new FormControl(value?.product ?? {}),
+      unit: new FormControl(value?.unit ?? {}),
+    });
   }
 }

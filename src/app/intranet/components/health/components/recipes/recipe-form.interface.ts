@@ -1,8 +1,9 @@
-import { FormControl } from '@angular/forms';
+import { FormArray, FormControl } from '@angular/forms';
 
 export interface RecipeForm {
   id: FormControl<string | null>;
   title: FormControl<string>;
   content: FormControl<string>;
   pictureUrl: FormControl<string>;
+  ingredients: FormArray<any>;
 }

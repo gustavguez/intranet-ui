@@ -5,7 +5,7 @@ import { TableDeleteActionModel } from 'src/app/shared/components/table/domain/t
 import { TableEditActionModel } from 'src/app/shared/components/table/domain/table-edit-action.model';
 import { TableHeaderModel } from 'src/app/shared/components/table/domain/table-header.model';
 import { environment } from 'src/environments/environment';
-import { UnitForm } from '../../domain/unit-form.interface';
+import { UnitForm } from './unit-form.interface';
 import { Unit } from '../../domain/unit.interface';
 
 @Component({

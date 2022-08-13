@@ -29,6 +29,63 @@
         </button>
       </div>
     </div>
+
+    <h2 class="subtitle">
+      Ingredientes
+      <button
+        (click)="onAddIngredient()"
+        type="button"
+        class="btn btn-sm btn-dark"
+      >
+        Agregar
+      </button>
+    </h2>
+    <ng-container formArrayName="ingredients">
+      <div
+        class="row my-4"
+        *ngFor="let group of getIngredients().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="col">
+          <select class="form-select" formControlName="productId">
+            <option value="">Seleccione un producto</option>
+            <option [value]="product.id" *ngFor="let product of products">
+              {{ product.name }}
+            </option>
+          </select>
+          <input type="hidden" formControlName="product" />
+        </div>
+        <div class="col">
+          <select class="form-select" formControlName="unitId">
+            <option value="">Seleccione una unidad</option>
+            <option [value]="unit.id" *ngFor="let unit of units">
+              {{ unit.name }} / {{ unit.plural }}
+            </option>
+          </select>
+          <input type="hidden" formControlName="unit" />
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="quantity"
+              placeholder="Ingrese la cantidad"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-danger ms-4"
+                (click)="onRemoveIngredient(i)"
+              >
+                <span>
+                  <i-feather name="trash-2" class="icon"></i-feather>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </app-panel>
 
