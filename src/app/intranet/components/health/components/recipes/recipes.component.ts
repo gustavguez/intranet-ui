@@ -87,6 +87,30 @@ export class RecipesComponent {
     ingredients.removeAt(index);
   }
 
+  onUnitChange(index: number): void {
+    const ingredients: FormArray = this.getIngredients();
+    const unitId: string = ingredients.get([index, 'unitId'])?.value;
+    const unit: Unit | undefined = this.units.find(
+      (unit: Unit) => unit.id == unitId
+    );
+
+    if (unit) {
+      ingredients.get([index, 'unit'])?.patchValue(unit);
+    }
+  }
+
+  onProductChange(index: number): void {
+    const ingredients: FormArray = this.getIngredients();
+    const productId: string = ingredients.get([index, 'productId'])?.value;
+    const product: Product | undefined = this.products.find(
+      (product: Product) => product.id == productId
+    );
+
+    if (product) {
+      ingredients.get([index, 'product'])?.patchValue(product);
+    }
+  }
+
   //private methods
   private getIngredientFormGroup(value?: any): FormGroup {
     return new FormGroup({

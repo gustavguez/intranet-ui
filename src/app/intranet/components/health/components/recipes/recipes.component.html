@@ -47,7 +47,11 @@
         [formGroupName]="i"
       >
         <div class="col">
-          <select class="form-select" formControlName="productId">
+          <select
+            class="form-select"
+            formControlName="productId"
+            (change)="onProductChange(i)"
+          >
             <option value="">Seleccione un producto</option>
             <option [value]="product.id" *ngFor="let product of products">
               {{ product.name }}
@@ -56,7 +60,11 @@
           <input type="hidden" formControlName="product" />
         </div>
         <div class="col">
-          <select class="form-select" formControlName="unitId">
+          <select
+            class="form-select"
+            formControlName="unitId"
+            (change)="onUnitChange(i)"
+          >
             <option value="">Seleccione una unidad</option>
             <option [value]="unit.id" *ngFor="let unit of units">
               {{ unit.name }} / {{ unit.plural }}
